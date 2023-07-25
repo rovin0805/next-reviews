@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-exo2)", "sans-serif"], // default font
+        orbitron: ["var(--font-orbitron)", "sans-serif"], // custom font
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
