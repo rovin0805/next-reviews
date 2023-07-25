@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import NavBar from "../components/NavBar";
 import { Exo_2, Orbitron } from "next/font/google";
 import "./globals.css";
+import NavBar from "../components/NavBar";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export const metadata: Metadata = {
-  title: "Next 13 Reviews",
+  title: {
+    default: "Next 13 Reviews",
+    template: "%s | Next 13 Reviews",
+  },
   description: "learning Next 13 app router",
 };
 
