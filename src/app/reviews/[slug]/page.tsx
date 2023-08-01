@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Heading from "@/components/Heading";
 import { getReview, getSlugs } from "@/lib/reviews";
 import ShareLinkButton from "@/components/ShareLinkButton";
+import Image from "next/image";
 
 interface ReviewPageParams {
   slug: string;
@@ -26,16 +27,18 @@ export async function generateStaticParams(): Promise<ReviewPageParams[]> {
 export default async function ReviewPage({
   params: { slug },
 }: ReviewPageProps) {
-  const { title, date, image, body } = await getReview(slug);
+  const { title, date, image, body, subtitle } = await getReview(slug);
 
   return (
     <>
       <Heading>{title}</Heading>
+      <p className="pb-3 font-semibold">{subtitle}</p>
       <div className="flex items-baseline gap-3">
         <p className="pb-2 italic">{date}</p>
         <ShareLinkButton />
       </div>
-      <img
+      <Image
+        priority
         src={image}
         alt=""
         width={640}
