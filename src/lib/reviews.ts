@@ -62,7 +62,12 @@ async function fetchReviews(parameters: any) {
   const url =
     `${CMS_URL}/api/reviews?` +
     qs.stringify(parameters, { encodeValuesOnly: true });
-  const response = await fetch(url);
+  const response = await fetch(url, {
+    // cache: 'no-cache' // similar to force-dynamic,
+    next: {
+      revalidate: 60, // seconds
+    },
+  });
   if (!response.ok) {
     throw new Error(`CMS returned ${response.status} for ${url}`);
   }

@@ -23,12 +23,12 @@ export async function generateMetadata({
   return { title: review.title };
 }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-// export async function generateStaticParams(): Promise<ReviewPageParams[]> {
-//   const slugs = await getSlugs();
-//   return slugs.map((slug) => ({ slug }));
-// }
+export async function generateStaticParams(): Promise<ReviewPageParams[]> {
+  const slugs = await getSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 export default async function ReviewPage({
   params: { slug },

@@ -4,7 +4,9 @@ import Heading from "@/components/Heading";
 import { getReviews } from "@/lib/reviews";
 import Image from "next/image";
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+
+// export const revalidate = 60; //seconds
 
 export const metadata: Metadata = {
   title: "Reviews",
