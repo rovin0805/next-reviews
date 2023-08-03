@@ -3,6 +3,8 @@ import qs from "qs";
 
 const CMS_URL = "http://localhost:1337";
 
+export const CACHE_TAG_REVIEWS = "reviews";
+
 interface CmsItem {
   id: number;
   attributes: any;
@@ -65,7 +67,8 @@ async function fetchReviews(parameters: any) {
   const response = await fetch(url, {
     // cache: 'no-cache' // similar to force-dynamic,
     next: {
-      revalidate: 60, // seconds
+      // revalidate: 60, // seconds
+      tags: [CACHE_TAG_REVIEWS],
     },
   });
   if (!response.ok) {
