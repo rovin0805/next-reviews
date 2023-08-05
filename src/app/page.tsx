@@ -8,7 +8,7 @@ import Link from "next/link";
 // export const revalidate = 60; //seconds
 
 export default async function HomePage() {
-  const reviews = await getReviews(3);
+  const { reviews } = await getReviews(3);
   return (
     <>
       <Heading>Reviews Home</Heading>
