@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Combobox } from "@headlessui/react";
 import { useIsClient } from "@/lib/hooks";
-import { SearchableReview, searchReviews } from "@/lib/reviews";
+import type { SearchableReview } from "@/lib/reviews";
 
 // TODO: debounce input
 
@@ -17,7 +17,10 @@ export default function SearchBox() {
   useEffect(() => {
     if (query.length > 1) {
       (async () => {
-        const reviews = await searchReviews(query);
+        const response = await fetch(
+          "/api/search?query=" + encodeURIComponent(query),
+        );
+        const reviews = await response.json();
         setReviews(reviews);
       })();
     } else {
