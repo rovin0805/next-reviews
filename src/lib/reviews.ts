@@ -27,6 +27,8 @@ export interface PaginatedReviews {
   reviews: Review[];
 }
 
+export type SearchableReview = Pick<Review, "slug" | "title">;
+
 export async function getReview(slug: string): Promise<FullReview | null> {
   const { data } = await fetchReviews({
     filters: { slug: { $eq: slug } },
@@ -97,4 +99,19 @@ function toReview(item: CmsItem): Review {
     date: attributes.publishedAt.slice(0, "yyyy-mm-dd".length),
     image: CMS_URL + attributes.image.data.attributes.url,
   };
+}
+
+export async function searchReviews(
+  query: string,
+): Promise<SearchableReview[]> {
+  const { data } = await fetchReviews({
+    filters: { title: { $containsi: query } },
+    fields: ["slug", "title"],
+    sort: ["title"],
+    pagination: { pageSize: 5 },
+  });
+  return data.map(({ attributes }) => ({
+    slug: attributes.slug,
+    title: attributes.title,
+  }));
 }

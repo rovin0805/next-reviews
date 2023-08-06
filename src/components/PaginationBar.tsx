@@ -14,7 +14,7 @@ export default function PaginationBar({
   pageCount,
 }: PaginationBarProps) {
   return (
-    <div className="flex items-center gap-2 pb-3">
+    <div className="flex items-center gap-2">
       <PaginationLink href={`${href}?page=${page - 1}`} enabled={page > 1}>
         <ChevronLeftIcon className="h-5 w-5" />
         <span className="sr-only">Previous Page</span>

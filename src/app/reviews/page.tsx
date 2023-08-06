@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Heading from "@/components/Heading";
-import { getReviews } from "@/lib/reviews";
 import Image from "next/image";
+import Heading from "@/components/Heading";
 import PaginationBar from "@/components/PaginationBar";
+import SearchBox from "@/components/SearchBox";
+import { getReviews } from "@/lib/reviews";
 
 // export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ interface ReviewsPageProps {
   searchParams: { page?: string };
 }
 
-const PAGE_SIZE = 3;
+const PAGE_SIZE = 4;
 
 export default async function ReviewsPage({ searchParams }: ReviewsPageProps) {
   const page = parsePageParam(searchParams.page);
@@ -26,7 +27,11 @@ export default async function ReviewsPage({ searchParams }: ReviewsPageProps) {
   return (
     <>
       <Heading>Reviews</Heading>
-      <PaginationBar href="/reviews" page={page} pageCount={pageCount} />
+
+      <div className="flex justify-between pb-3">
+        <PaginationBar href="/reviews" page={page} pageCount={pageCount} />
+        <SearchBox />
+      </div>
 
       <ul className="flex flex-row flex-wrap gap-3">
         {reviews.map((review, index) => {
